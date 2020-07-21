@@ -1,14 +1,14 @@
 import React, {useState, useCallback} from 'react';
 import axios from 'axios';
 
-const uploadFile = () => {
+function UploadFile() {
   const [file, setFile] = useState('');
 
   const onFormSubmit = useCallback(async (e) => {
     e.preventDefault();
     const response = await fileUpload(file);
     console.log(response.data);
-  }, [])
+  }, [file])
   const onChange = useCallback((e) => {
     setFile(e.target.files[0])
   }, [])
@@ -18,7 +18,7 @@ const uploadFile = () => {
     formData.append('file', _file);
     const config = {
       headers: {
-        'content--type': 'multipart/form-data'
+        'content-type': 'multipart/form-data'
       }
     }
     return axios.post(url, formData, config)
@@ -34,4 +34,4 @@ const uploadFile = () => {
   )
 }
 
-export default uploadFile;
+export default UploadFile;
